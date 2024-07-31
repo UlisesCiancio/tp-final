@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body data-bs-theme="dark">
+    <div class="row">
+        <h2>Ingrese la información</h2>
+        <div class="col-6">
+            <label for="pais" class="form-label" data-bs-theme="light">País:</label>
+            <input type="text" id="pais" placeholder="País" class="form-control"
+                style="background-color: black; color: white;">
+        </div>
+        <div class="col-6">
+            <label for="provincia" class="form-label">Provincia:</label>
+            <input type="text" id="provincia" placeholder="Provincia" class="form-control"
+                style="background-color: black; color: white;">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label for="ciudad" class="form-label">Ciudad:</label>
+            <input type="text" id="ciudad" placeholder="Ciudad" class="form-control"
+                style="background-color: black; color: white;">
+        </div>
+        <div class="col-6">
+            <label for="cantidadHabitantes" class="form-label">Cantidad de habitantes por ciudad:</label>
+            <input type="number" id="cantidadHabitantes" placeholder="Cantidad de habitantes" class="form-control"
+                style="background-color: black; color: white;">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <label for="actividadEconomicaPrincipal" class="form-label">Actividad económica principal:</label>
+            <select id="actividadEconomicaPrincipal" class="form-select" style="background-color: black; color: white;">
+                <option value="">Seleccione una opción</option>
+                <option value="produccionAgricola">Producción agrícola</option>
+                <option value="produccionPecuaria">Producción pecuaria</option>
+                <option value="produccionPesquera">Producción pesquera</option>
+                <option value="produccionForestal">Producción forestal</option>
+                <option value="fruticultura">Fruticultura</option>
+                <option value="turismo">Turismo</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <label for="5g" class="form-label">5G:</label>
+            <select class="form-select" id="5g" id="exampleSelect1" name="" for="5g"  style="background-color: black; color: white;">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <label for="fibraOptica" class="form-label">Fibra óptica:</label>
+            <select name="" id="fibraOptica" class="form-select" id="exampleSelect1" style="background-color: black; color: white;">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <label for="universidades" class="form-label">Universidades:</label>
+            <select name="" id="universidades" class="form-select" id="exampleSelect1" style="background-color: black; color: white;">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <label for="cantidadHabitantesXPais" class="form-label">Cantidad habitantes por pais:</label>
+            <input type="number" id="cantidadHabitantesXPais" placeholder="Cantidad habitantes x país"
+                style="background-color: black; color: white;">
+        </div>
+    </div>
+
+    <button onclick="agregarFila()" class="btn btn-primary">Enviar</button>
+    <table id="tabla" class="table table-hover">
+        <thead>
+            <tr>
+                <th>País</th>
+                <th>Provincia</th>
+                <th>Ciudad</th>
+                <th>Cantidad de habitantes por ciudad</th>
+                <th>Actividad económica principal</th>
+                <th>5G</th>
+                <th>Fibra óptica</th>
+                <th>Universidades</th>
+                <th>Cantidad habitantes por pais</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+
+    <script>
+
+        function agregarFila() {
+
+            class lista1 {
+                constructor(pais, provincia, ciudad, cantidadHabitantes, actividadEconomicaPrincipal, _5g, fibraOptica, universidades, cantidadHabitantesXPais) {
+
+                    this.pais = pais;
+                    this.provincia = provincia;
+                    this.ciudad = ciudad;
+                    this.cantidadHabitantes = cantidadHabitantes;
+                    this.actividadEconomicaPrincipal = actividadEconomicaPrincipal;
+                    this._5g = _5g;
+                    this.fibraOptica = fibraOptica;
+                    this.universidades = universidades;
+                    this.cantidadHabitantesXPais = cantidadHabitantesXPais;
+
+                }
+            }
+
+            let lista = [];
+
+            let pais = document.getElementById("pais").value;
+            let provincia = document.getElementById("provincia").value;
+            let ciudad = document.getElementById("ciudad").value;
+            let cantidadHabitantes = document.getElementById("cantidadHabitantes").value;
+            let actividadEconomicaPrincipal = document.getElementById("actividadEconomicaPrincipal").value;
+            let _5g = document.getElementById("5g").value;
+            let fibraOptica = document.getElementById("fibraOptica").value;
+            let universidades = document.getElementById("universidades").value;
+            let cantidadHabitantesXPais = document.getElementById("cantidadHabitantesXPais").value;
+
+            let una_lista = new lista1(pais, provincia, ciudad, cantidadHabitantes, actividadEconomicaPrincipal, _5g, fibraOptica, universidades, cantidadHabitantesXPais);
+            lista.push(una_lista);
+
+            if (pais === "" || provincia === "" || ciudad === "" || cantidadHabitantes === "" || actividadEconomicaPrincipal === "" || cantidadHabitantesXPais === "") {
+                alert("Por favor, rellene todos los campos.");
+                return;
+            }
+
+            var fila = document.createElement("tr");
+            fila.innerHTML = ` 
+             <td>${pais}</td>
+                <td>${provincia}</td>
+                <td>${ciudad}</td>
+                <td>${cantidadHabitantes}</td>
+                <td>${actividadEconomicaPrincipal}</td>
+                <td>${_5g}</td>
+                <td>${fibraOptica}</td>
+                <td>${universidades}</td>
+                <td>${cantidadHabitantesXPais}</td>
+            `;
+            document.getElementById("tbody").appendChild(fila);
+            document.getElementById("pais").value = "";
+            document.getElementById("provincia").value = "";
+            document.getElementById("ciudad").value = "";
+            document.getElementById("cantidadHabitantes").value = "";
+            document.getElementById("actividadEconomicaPrincipal").value = "";
+            document.getElementById("5g").value = "";
+            document.getElementById("fibraOptica").value = "";
+            document.getElementById("universidades").value = "";
+            document.getElementById("cantidadHabitantesXPais").value = "";
+
+            lista.forEach(element => {
+                console.log(element)
+            });
+        }
+
+    </script>
+    <link rel="stylesheet" href="bootstrap.min (2).css">
+</body>
+
+</html>
